@@ -19,6 +19,8 @@
 # Authors
 # Kui Shi  skuicloud@gmail.com  01/08/2013
 
+ACLOCAL_AMFLAGS = -I m4
+
 all: build_notice
 
 build_notice:
