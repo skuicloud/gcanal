@@ -27,6 +27,23 @@ AC_COPYRIGHT([GPLv2 skuicloud@gmail.com])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE
 
+if test `pwd` = `cd $srcdir; pwd`; then 
+  AC_MSG_ERROR([You must use a build directory separate from $srcdir.])
+fi
+
+TOP_SRC_DIR=`cd $srcdir; pwd`
+AC_SUBST([TOP_SRC_DIR])
+TOP_TEMPLATE_DIR=`cd $srcdir/template; pwd`
+AC_SUBST([TOP_TEMPLATE_DIR])
+TOP_BUILD_DIR=`readlink -f $PWD`
+AC_SUBST([TOP_BUILD_DIR])
+
+die() {
+    AC_MSG_ERROR([
+    ** FATAL ERROR:
+    ** $1
+    ])
+}
 
 AC_CONFIG_FILES([Makefile
          build-x86_64/Makefile
