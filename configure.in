@@ -45,6 +45,29 @@ die() {
     ])
 }
 
+dnl check basic commands
+GC_CHECK_PROG([echo])
+GC_CHECK_PROG([cat])
+GC_CHECK_PROG([touch])
+GC_CHECK_PROG([gzip])
+GC_CHECK_PROG([bzip2])
+GC_CHECK_PROG([tar])
+GC_CHECK_PROG([sed])
+GC_CHECK_PROG([patch])
+GC_CHECK_PROG([mkdir])
+GC_CHECK_PROG([readlink])
+GC_CHECK_PROG([find])
+GC_CHECK_PROG([mv])
+GC_CHECK_PROG([install])
+GC_CHECK_PROG([rm])
+GC_CHECK_PROG([chmod])
+GC_CHECK_PROG([depmod])
+GC_CHECK_PROG([cp])
+GC_CHECK_PROG([rpm2cpio])
+GC_CHECK_PROG([cpio])
+GC_CHECK_PROG([gcc])
+
+
 AC_CONFIG_FILES([Makefile
          build-x86_64/Makefile
          release/Makefile])
