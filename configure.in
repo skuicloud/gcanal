@@ -67,6 +67,19 @@ GC_CHECK_PROG([rpm2cpio])
 GC_CHECK_PROG([cpio])
 GC_CHECK_PROG([gcc])
 
+dnl add configure option
+dnl Specify product
+AC_ARG_ENABLE([product],
+              AC_HELP_STRING([--enable-product=[koala, panda]], 
+                             [Use the specified product.]),
+              [ PRODUCT_NAME=$enableval ])
+
+if test "x$PRODUCT_NAME" = "x"; then
+    die  "--enable-product must be designated. Options: koala, panda"
+fi
+
+AC_SUBST([PRODUCT_NAME])
+
 
 AC_CONFIG_FILES([Makefile
          build-x86_64/Makefile
