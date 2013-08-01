@@ -104,6 +104,20 @@ source $PRODUCT_DIR/config.sh
 
 AC_MSG_NOTICE([Build target arch: $BUILD_ARCHES])
 
+dnl process toolchain
+AC_MSG_NOTICE([Process toolchain])
+
+dnl start of BUILD_ARCHES loop
+for arch in $BUILD_ARCHES
+do
+    mkdir -p `pwd`/scripts
+    cp $PRODUCT_DIR/$arch/toolchain_var.mk  `pwd`/scripts/toolchain_var_$arch.mk
+    cp $PRODUCT_DIR/$arch/toolchain_var.mk  `pwd`/scripts/toolchain_var_$arch.sh
+    . `pwd`/scripts/toolchain_var_$arch.sh
+
+done
+dnl end of BUILD_ARCHES loop
+
 
 AC_CONFIG_FILES([Makefile
          build-x86_64/Makefile
