@@ -102,6 +102,8 @@ dnl config.sh define BUILD_ARCHES
 dnl currently focus on x86_64
 source $PRODUCT_DIR/config.sh
 
+AC_MSG_NOTICE([Build target arch: $BUILD_ARCHES])
+
 
 AC_CONFIG_FILES([Makefile
          build-x86_64/Makefile
