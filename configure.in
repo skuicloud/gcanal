@@ -80,6 +80,12 @@ fi
 
 AC_SUBST([PRODUCT_NAME])
 
+PRODUCT_DIR=$TOP_TEMPLATE_DIR/$PRODUCT_NAME
+
+dnl config.sh define BUILD_ARCHES
+dnl currently focus on x86_64
+source $PRODUCT_DIR/config.sh
+
 
 AC_CONFIG_FILES([Makefile
          build-x86_64/Makefile
