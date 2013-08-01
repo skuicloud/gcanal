@@ -115,6 +115,27 @@ do
     cp $PRODUCT_DIR/$arch/toolchain_var.mk  `pwd`/scripts/toolchain_var_$arch.sh
     . `pwd`/scripts/toolchain_var_$arch.sh
 
+    mkdir -p `pwd`/host-cross/toolchain
+    gzip -dc $srcdir/toolchain/$arch/${arch}-plcm-linux-gnu.tgz | tar -xf - -C `pwd`/host-cross/toolchain
+    eval echo ${arch}_TOOLCHAIN=${arch}-plcm-linux-gnu  >> config.${arch}
+    eval echo ${arch}_TARGET_TOOLCHAIN_TRIPLET=${arch}-plcm-linux-gnu  >> config.${arch}
+    eval echo ${arch}_TOOLCHAIN_EXEC_PREFIX=`pwd`/host-cross/toolchain/\\\${${arch}_TOOLCHAIN} >> config.${arch}
+
+    eval echo ${arch}_TOOLCHAIN_BIN_DIR=$TOP_BUILD_DIR/host-cross/\\\${${arch}_TOOLCHAIN}/x86-linux  >> config.${arch}
+    eval echo ${arch}_HOST_CROSS_SYSROOT_DIR=\\\${${arch}_TOOLCHAIN_BIN_DIR}/../sysroot >> config.${arch}
+    eval echo ${arch}_HOST_CROSS_INCLUDE_DIR=$HOST_CROSS_SYSROOT_DIR/usr/include >> config.${arch}
+    if test "$arch" = "x86_64"; then
+        eval echo ${arch}_HOST_CROSS_LIB_DIR=\\\${${arch}_HOST_CROSS_SYSROOT_DIR}/usr/lib64 >> config.${arch}
+    fi  
+    eval echo ${arch}_HOST_CROSS_TOOLCHAIN_DIR=$TOP_BUILD_DIR/host-cross/toolchain  >> config.${arch}
+    eval echo ${arch}_TARGET_CROSS_COMPILE=${arch}-target-linux-gnu  >>  config.${arch}
+    eval echo ${arch}_TARGET_ALT_CPU_MODE=${TARGET_ALT_CPU_MODE} >> config.${arch}
+    eval echo ${arch}_TARGET_FUNDAMENTAL_ASFLAG=\\\"${TARGET_FUNDAMENTAL_ASFLAG}\\\"  >> config.${arch}
+    eval echo ${arch}_TARGET_FUNDAMENTAL_CFLAGS=\\\"${TARGET_FUNDAMENTAL_CFLAGS}\\\"  >> config.${arch}
+    eval echo ${arch}_TARGET_ALTMODE_FUNDAMENTAL_CFLAGS=\\\"${TARGET_ALTMODE_FUNDAMENTAL_CFLAGS}\\\" >> config.${arch}
+    eval echo ${arch}_TARGET_ROOTFS_CFLAGS=\\\"${TARGET_ROOTFS_CFLAGS}\\\" >> config.${arch}
+    eval echo ${arch}_TARGET_FUNDAMENTAL_LDFLAGS=\\\"${TARGET_FUNDAMENTAL_LDFLAGS}\\\" >> config.${arch}
+
 done
 dnl end of BUILD_ARCHES loop
 
